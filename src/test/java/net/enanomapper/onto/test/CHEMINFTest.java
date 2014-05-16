@@ -3,7 +3,9 @@ package net.enanomapper.onto.test;
 import java.util.Arrays;
 import java.util.List;
 
-public class CHEMINFTests extends AbstractOntologyTests {
+import org.junit.Test;
+
+public class CHEMINFTest extends AbstractOntologyTest {
 
 	@Override
 	protected List<String> getOntologyResource() {
@@ -12,4 +14,8 @@ public class CHEMINFTests extends AbstractOntologyTests {
 		);
 	}
 
+	@Test
+	public void canParseXML() throws Exception {
+		super.canParseXML();
+	}
 }

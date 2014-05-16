@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
-public abstract class AbstractOntologyTests {
+public abstract class AbstractOntologyTest {
 
 	protected abstract List<String> getOntologyResource();
 	
