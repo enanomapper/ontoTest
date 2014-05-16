@@ -3,7 +3,6 @@ package net.enanomapper.onto.test;
 import java.io.FileInputStream;
 import java.util.List;
 
-import javax.swing.ListCellRenderer;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
