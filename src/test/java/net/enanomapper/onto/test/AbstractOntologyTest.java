@@ -1,5 +1,6 @@
 package net.enanomapper.onto.test;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
 
@@ -8,6 +9,11 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.util.AutoIRIMapper;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
@@ -30,6 +36,22 @@ public abstract class AbstractOntologyTest {
 			parser.parse(new InputSource(
 				new FileInputStream(resource))
 			);
+		}
+	}
+
+	@Test
+	public void loadOWL() throws Exception {
+		OWLOntologyManager m = OWLManager.createOWLOntologyManager();
+		m.addIRIMapper(new AutoIRIMapper(
+			new File("materializedOntologies"), true
+		));
+		List<String> ontologyResource = getOntologyResource();
+		for (String resource : ontologyResource) {
+			OWLOntology o = m.loadOntologyFromOntologyDocument(
+				IRI.create("file://" + resource)
+			);
+			Assert.assertNotNull(o);
+			Assert.assertNotEquals(0, o.getAxiomCount());
 		}
 	}
 
