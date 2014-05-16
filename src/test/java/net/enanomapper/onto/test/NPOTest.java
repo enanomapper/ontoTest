@@ -7,8 +7,12 @@ public class NPOTest extends AbstractOntologyTest {
 
 	@Override
 	protected List<String> getOntologyResource() {
+		String root = AbstractOntologyTest.ROOT;
+		if (System.getProperty("ROOT") != null) {
+			root = System.getProperty("ROOT");
+		}
 		return Arrays.asList(
-		    "/var/lib/jenkin.jenm/workspace/NPO/npo-asserted.owl"
+		    root + "NPO/npo-asserted.owl"
 		);
 	}
 

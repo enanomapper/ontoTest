@@ -7,8 +7,12 @@ public class ENMTest extends AbstractOntologyTest {
 
 	@Override
 	protected List<String> getOntologyResource() {
+		String root = AbstractOntologyTest.ROOT;
+		if (System.getProperty("ROOT") != null) {
+			root = System.getProperty("ROOT");
+		}
 		return Arrays.asList(
-		    "/var/lib/jenkin.jenm/workspace/Ontology/enanomapper.owl"
+		    root + "Ontology/enanomapper.owl"
 		);
 	}
 
