@@ -14,6 +14,7 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.util.AutoIRIMapper;
+import org.semanticweb.owlapi.util.SimpleIRIMapper;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
@@ -45,13 +46,29 @@ public abstract class AbstractOntologyTest {
 		m.addIRIMapper(new AutoIRIMapper(
 			new File("materializedOntologies"), true
 		));
+		String root = AbstractOntologyTest.ROOT;
+		if (System.getProperty("ROOT") != null) {
+			root = System.getProperty("ROOT");
+		}
+		m.addIRIMapper(new SimpleIRIMapper(
+			IRI.create("http://purl.bioontology.org/ontology/npo"),
+			IRI.create("file://" + root + "NPO/npo-asserted.owl")
+		));
+		m.addIRIMapper(new SimpleIRIMapper(
+			IRI.create("http://semanticscience.org/ontology/cheminf.owl"),
+			IRI.create("file://" + root + "CHEMINF/ontology/cheminf.owl")
+		));
+		m.addIRIMapper(new SimpleIRIMapper(
+			IRI.create("http://www.enanomapper.net/ontologies/external/ontology-metadata-slim.owl"),
+			IRI.create("file://" + root + "Ontology/external/ontology-metadata-slim.owl")
+		));
 		List<String> ontologyResource = getOntologyResource();
 		for (String resource : ontologyResource) {
-			OWLOntology o = m.loadOntologyFromOntologyDocument(
+			OWLOntology o = m.loadOntology(
 				IRI.create("file://" + resource)
 			);
 			Assert.assertNotNull(o);
-			Assert.assertNotEquals(0, o.getAxiomCount());
+			Assert.assertFalse(o.isEmpty());
 		}
 	}
 
