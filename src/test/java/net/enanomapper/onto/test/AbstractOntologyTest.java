@@ -103,6 +103,8 @@ public abstract class AbstractOntologyTest {
 		put("http://purl.obolibrary.org/obo/iao/iao-main.owl", "IAO/default/iao-main.owl");
 		put("http://purl.obolibrary.org/obo/iao/obsolete.owl", "IAO/default/obsolete.owl");
 		put("http://www.ifomis.org/bfo/1.1", "BFO/default/bfo-1.1.owl");
+		put("http://purl.org/obo/owl/ro", "RO/default/ro.owl");
+		put("http://protege.stanford.edu/plugins/owl/dc/protege-dc.owl", "DC/default/protege-dc.owl");
 	}};
 	
 	private void addMappings(OWLOntologyManager m, String root) {
