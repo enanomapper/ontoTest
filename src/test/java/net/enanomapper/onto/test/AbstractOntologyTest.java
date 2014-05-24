@@ -2,7 +2,9 @@ package net.enanomapper.onto.test;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -87,23 +89,29 @@ public abstract class AbstractOntologyTest {
 			for(OWLProfileViolation violation : violations) {
 				list.append(violation).append('\n');
 			}
-			Assert.assertEquals("Violations: " + list.toString(), 0, violations.size());
+			Assert.assertEquals("Profile violations found", 0, violations.size());
 		}
 	}
 
+	@SuppressWarnings("serial")
+	Map<String,String> mappings = new HashMap<String,String>() {{
+		put("http://purl.bioontology.org/ontology/npo", "NPO/npo-asserted.owl");
+		put("http://semanticscience.org/ontology/cheminf.owl", "CHEMINF/ontology/cheminf.owl");
+		put("http://www.enanomapper.net/ontologies/external/ontology-metadata-slim.owl", "Ontology/external/ontology-metadata-slim.owl");
+		put("http://purl.obolibrary.org/obo/iao/ontology-metadata.owl", "IAO/default/ontology-metadata.owl");
+		put("http://purl.obolibrary.org/obo/iao.owl", "IAO/default/iao.owl");
+		put("http://purl.obolibrary.org/obo/iao/iao-main.owl", "IAO/default/iao-main.owl");
+		put("http://purl.obolibrary.org/obo/iao/obsolete.owl", "IAO/default/obsolete.owl");
+		put("http://www.ifomis.org/bfo/1.1", "BFO/default/bfo-1.1.owl");
+	}};
+	
 	private void addMappings(OWLOntologyManager m, String root) {
-		m.addIRIMapper(new SimpleIRIMapper(
-			IRI.create("http://purl.bioontology.org/ontology/npo"),
-			IRI.create("file://" + root + "NPO/npo-asserted.owl")
-		));
-		m.addIRIMapper(new SimpleIRIMapper(
-			IRI.create("http://semanticscience.org/ontology/cheminf.owl"),
-			IRI.create("file://" + root + "CHEMINF/ontology/cheminf.owl")
-		));
-		m.addIRIMapper(new SimpleIRIMapper(
-			IRI.create("http://www.enanomapper.net/ontologies/external/ontology-metadata-slim.owl"),
-			IRI.create("file://" + root + "Ontology/external/ontology-metadata-slim.owl")
-		));
+		for (String ontoIRI : mappings.keySet()) {
+			String localPart = mappings.get(ontoIRI);
+			m.addIRIMapper(new SimpleIRIMapper(
+				IRI.create(ontoIRI), IRI.create("file://" + root + localPart)
+		    ));
+		}
 	}
 
 }
