@@ -89,7 +89,7 @@ public abstract class AbstractOntologyTest {
 			for(OWLProfileViolation violation : violations) {
 				list.append(violation).append('\n');
 			}
-			Assert.assertEquals("Profile violations found", 0, violations.size());
+			Assert.assertEquals("Profile violations found: " + list.toString(), 0, violations.size());
 		}
 	}
 
