@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -13,12 +14,17 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnnotation;
+import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.PrefixManager;
 import org.semanticweb.owlapi.profiles.OWL2DLProfile;
 import org.semanticweb.owlapi.profiles.OWLProfileReport;
 import org.semanticweb.owlapi.profiles.OWLProfileViolation;
 import org.semanticweb.owlapi.util.AutoIRIMapper;
+import org.semanticweb.owlapi.util.DefaultPrefixManager;
 import org.semanticweb.owlapi.util.SimpleIRIMapper;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -64,6 +70,53 @@ public abstract class AbstractOntologyTest {
 			Assert.assertNotNull(o);
 			Assert.assertFalse(o.isEmpty());
 		}
+	}
+
+	@Test
+	public void checkRDFSLabel() throws Exception {
+		OWLOntologyManager m = OWLManager.createOWLOntologyManager();
+		OWLDataFactory factory = m.getOWLDataFactory();
+		m.addIRIMapper(new AutoIRIMapper(
+			new File("materializedOntologies"), true
+		));
+		String root = AbstractOntologyTest.ROOT;
+		if (System.getProperty("ROOT") != null) {
+			root = System.getProperty("ROOT");
+		}
+		addMappings(m, root);
+		StringBuffer problems = new StringBuffer();
+		List<String> ontologyResource = getOntologyResource();
+		int problemCount = 0;
+		for (String resource : ontologyResource) {
+			System.out.println("resource: " + resource);
+			OWLOntology o = m.loadOntology(
+				IRI.create("file://" + resource)
+			);
+			Set<OWLClass> classes = o.getClassesInSignature();
+			Assert.assertNotNull(classes);
+			Assert.assertFalse(classes.isEmpty());
+			for (OWLClass owlClass : classes) {
+				System.out.println("class: " + owlClass);
+				PrefixManager pm = new DefaultPrefixManager(
+		            "http://www.w3.org/2000/01/rdf-schema#"
+				);
+		        boolean hasLabel = false;
+		        Set<OWLAnnotation> annos = owlClass.getAnnotations(o);
+		        for (OWLAnnotation annotation : annos) {
+		        	System.out.println("annot: " + annotation);
+		        	if ("http://www.w3.org/2000/01/rdf-schema#label".equals(
+		        		    annotation.getProperty().getIRI().toString())
+		        		)
+		        		hasLabel = true;
+		        }
+				if (!hasLabel) {
+					problems.append(owlClass.getIRI().toString()).append(", \n");
+					problemCount++;
+				}
+			}
+		}
+		System.out.println("Done");
+		Assert.assertEquals(problems.toString(), 0, problemCount);
 	}
 
 	@Test
