@@ -155,8 +155,13 @@ public abstract class AbstractOntologyTest {
 		put("http://purl.obolibrary.org/obo/iao.owl", "IAO/default/iao.owl");
 		put("http://purl.obolibrary.org/obo/iao/iao-main.owl", "IAO/default/iao-main.owl");
 		put("http://purl.obolibrary.org/obo/iao/obsolete.owl", "IAO/default/obsolete.owl");
+		put("http://purl.obolibrary.org/obo/iao/2011-05-09/external.owl", "IAO/default/obsolete.owl"); // FIXME
+		put("http://purl.obolibrary.org/obo/iao/2011-05-09/externalByHand.owl", "IAO/default/obsolete.owl"); // FIXME
+		put("http://purl.obolibrary.org/obo/iao/2011-05-09/externalDerived.owl", "IAO/default/obsolete.owl"); // FIXME
+		put("http://purl.obolibrary.org/obo/iao/2011-05-09/obsolete.owl", "IAO/default/obsolete.owl"); // FIXME
 		put("http://www.ifomis.org/bfo/1.1", "BFO/default/bfo-1.1.owl");
 		put("http://purl.org/obo/owl/ro", "RO/default/ro.owl");
+		put("http://www.obofoundry.org/ro/ro.owl", "RO/default/ro.owl");
 		put("http://protege.stanford.edu/plugins/owl/dc/protege-dc.owl", "DC/default/protege-dc.owl");
 	}};
 	
