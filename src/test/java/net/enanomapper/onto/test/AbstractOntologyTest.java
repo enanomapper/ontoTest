@@ -120,6 +120,53 @@ public abstract class AbstractOntologyTest {
 	}
 
 	@Test
+	public void checkIAODefinitions() throws Exception {
+		OWLOntologyManager m = OWLManager.createOWLOntologyManager();
+		OWLDataFactory factory = m.getOWLDataFactory();
+		m.addIRIMapper(new AutoIRIMapper(
+			new File("materializedOntologies"), true
+		));
+		String root = AbstractOntologyTest.ROOT;
+		if (System.getProperty("ROOT") != null) {
+			root = System.getProperty("ROOT");
+		}
+		addMappings(m, root);
+		StringBuffer problems = new StringBuffer();
+		List<String> ontologyResource = getOntologyResource();
+		int problemCount = 0;
+		for (String resource : ontologyResource) {
+			System.out.println("resource: " + resource);
+			OWLOntology o = m.loadOntology(
+				IRI.create("file://" + resource)
+			);
+			Set<OWLClass> classes = o.getClassesInSignature();
+			Assert.assertNotNull(classes);
+			Assert.assertFalse(classes.isEmpty());
+			for (OWLClass owlClass : classes) {
+				System.out.println("class: " + owlClass);
+				PrefixManager pm = new DefaultPrefixManager(
+		            "http://www.w3.org/2000/01/rdf-schema#"
+				);
+		        boolean hasDef = false;
+		        Set<OWLAnnotation> annos = owlClass.getAnnotations(o);
+		        for (OWLAnnotation annotation : annos) {
+		        	System.out.println("annot: " + annotation);
+		        	if ("http://purl.obolibrary.org/obo/IAO_0000115".equals(
+		        		    annotation.getProperty().getIRI().toString())
+		        		)
+		        		hasDef = true;
+		        }
+				if (!hasDef) {
+					problems.append(owlClass.getIRI().toString()).append(", \n");
+					problemCount++;
+				}
+			}
+		}
+		System.out.println("Done");
+		Assert.assertEquals(problems.toString(), 0, problemCount);
+	}
+
+	@Test
 	public void checkForViolations() throws Exception {
 		OWLOntologyManager m = OWLManager.createOWLOntologyManager();
 		m.addIRIMapper(new AutoIRIMapper(
