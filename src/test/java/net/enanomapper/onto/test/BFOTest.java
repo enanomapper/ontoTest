@@ -12,7 +12,7 @@ public class BFOTest extends AbstractOntologyTest {
 			root = System.getProperty("ROOT");
 		}
 		return Arrays.asList(
-		    root + "BFO/default/bfo-1.1.owl"
+		    root + "BFO/bfo-1.1-slim.owl"
 		);
 	}
 
