@@ -180,7 +180,7 @@ public abstract class AbstractOntologyTest {
 		put("http://semanticscience.org/ontology/cheminf.owl", "CHEMINF/ontology/cheminf.owl");
 		put("http://www.enanomapper.net/ontologies/external/ontology-metadata-slim.owl", "Ontology/external/ontology-metadata-slim.owl");
 		put("http://purl.obolibrary.org/obo/iao/ontology-metadata.owl", "IAO/default/ontology-metadata.owl");
-		put("http://purl.obolibrary.org/obo/iao.owl", "IAO/default/iao.owl");
+		put("http://purl.obolibrary.org/obo/iao.owl", "IAO/iao-slim.owl");
 		put("http://purl.obolibrary.org/obo/iao/iao-main.owl", "IAO/default/iao-main.owl");
 		put("http://purl.obolibrary.org/obo/iao/obsolete.owl", "IAO/default/obsolete.owl");
 		put("http://purl.obolibrary.org/obo/iao/2011-05-09/external.owl", "IAO/default/obsolete.owl"); // FIXME
@@ -188,9 +188,11 @@ public abstract class AbstractOntologyTest {
 		put("http://purl.obolibrary.org/obo/iao/2011-05-09/externalDerived.owl", "IAO/default/obsolete.owl"); // FIXME
 		put("http://purl.obolibrary.org/obo/iao/2011-05-09/obsolete.owl", "IAO/default/obsolete.owl"); // FIXME
 		put("http://www.ifomis.org/bfo/1.1", "BFO/bfo-1.1.owl");
+		put("http://purl.obolibrary.org/obo/bfo/core-classes.owl", "BFO/bfo-slim.owl");
 		put("http://purl.org/obo/owl/ro", "RO/default/ro.owl");
 		put("http://www.obofoundry.org/ro/ro.owl", "RO/default/ro.owl");
 		put("http://protege.stanford.edu/plugins/owl/dc/protege-dc.owl", "DC/default/protege-dc.owl");
+		put("http://purl.obolibrary.org/obo/envo.owl", "ENVO/envo-slim.owl");
 	}};
 	
 	private void addMappings(OWLOntologyManager m, String root) {
