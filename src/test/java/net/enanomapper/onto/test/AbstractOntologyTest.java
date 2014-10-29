@@ -191,7 +191,7 @@ public abstract class AbstractOntologyTest {
 		put("http://purl.obolibrary.org/obo/bfo/core-classes.owl", "BFO/bfo-slim.owl");
 		put("http://purl.org/obo/owl/ro", "RO/default/ro.owl");
 		put("http://www.obofoundry.org/ro/ro.owl", "RO/default/ro.owl");
-		put("http://protege.stanford.edu/plugins/owl/dc/protege-dc.owl", "DC/default/protege-dc.owl");
+		put("http://protege.stanford.edu/plugins/owl/dc/protege-dc.owl", "DC/protege-dc.owl");
 		put("http://purl.obolibrary.org/obo/envo.owl", "ENVO/envo-slim.owl");
 	}};
 	

@@ -12,7 +12,7 @@ public class DCTest extends AbstractOntologyTest {
 			root = System.getProperty("ROOT");
 		}
 		return Arrays.asList(
-		    root + "DC/default/protege-dc.owl"
+		    root + "DC/protege-dc.owl"
 		);
 	}
 
