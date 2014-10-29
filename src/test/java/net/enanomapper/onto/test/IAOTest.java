@@ -12,10 +12,7 @@ public class IAOTest extends AbstractOntologyTest {
 			root = System.getProperty("ROOT");
 		}
 		return Arrays.asList(
-		    root + "IAO/default/ontology-metadata.owl",
-		    root + "IAO/default/obsolete.owl",
-		    root + "IAO/default/iao-main.owl",
-		    root + "IAO/default/iao.owl"
+		    root + "iao-slim.owl"
 		);
 	}
 
