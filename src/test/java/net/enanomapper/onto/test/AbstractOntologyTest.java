@@ -176,7 +176,7 @@ public abstract class AbstractOntologyTest {
 
 	@SuppressWarnings("serial")
 	Map<String,String> mappings = new HashMap<String,String>() {{
-		put("http://purl.bioontology.org/ontology/npo", "NPO/npo-asserted.owl");
+		put("http://purl.bioontology.org/ontology/npo", "NPO/npo-slim.owl");
 		put("http://semanticscience.org/ontology/cheminf.owl", "CHEMINF/ontology/cheminf.owl");
 		put("http://www.enanomapper.net/ontologies/external/ontology-metadata-slim.owl", "Ontology/external/ontology-metadata-slim.owl");
 		put("http://purl.obolibrary.org/obo/iao/ontology-metadata.owl", "IAO/default/ontology-metadata.owl");
