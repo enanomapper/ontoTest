@@ -3,7 +3,7 @@ package net.enanomapper.onto.test;
 import java.util.Arrays;
 import java.util.List;
 
-public class NPOTest extends AbstractOntologyTest {
+public class PATOTest extends AbstractOntologyTest {
 
 	@Override
 	protected List<String> getOntologyResource() {
@@ -12,7 +12,7 @@ public class NPOTest extends AbstractOntologyTest {
 			root = System.getProperty("ROOT");
 		}
 		return Arrays.asList(
-		    root + "NPO/npo-slim.owl"
+		    root + "PATO/pato-slim.owl"
 		);
 	}
 
