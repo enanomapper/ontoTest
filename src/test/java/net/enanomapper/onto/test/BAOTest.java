@@ -12,7 +12,7 @@ public class BAOTest extends AbstractOntologyTest {
 			root = System.getProperty("ROOT");
 		}
 		return Arrays.asList(
-		    root + "BAO/default/bao_core.owl"
+		    root + "BAO/bao-slim.owl"
 		);
 	}
 

@@ -3,7 +3,7 @@ package net.enanomapper.onto.test;
 import java.util.Arrays;
 import java.util.List;
 
-public class CHEMINFTest extends AbstractOntologyTest {
+public class CHEBITest extends AbstractOntologyTest {
 
 	@Override
 	protected List<String> getOntologyResource() {
@@ -12,7 +12,7 @@ public class CHEMINFTest extends AbstractOntologyTest {
 			root = System.getProperty("ROOT");
 		}
 		return Arrays.asList(
-		    root + "CHEMINF/cheminf-slim.owl"
+		    root + "CHEBI/chebi-slim.owl"
 		);
 	}
 }
