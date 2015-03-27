@@ -197,7 +197,7 @@ public abstract class AbstractOntologyTest {
 		put("http://purl.obolibrary.org/obo/envo.owl", "ENVO/envo-slim.owl");
 	}};
 	
-	private void addMappings(OWLOntologyManager m, String root) {
+	protected void addMappings(OWLOntologyManager m, String root) {
 		for (String ontoIRI : mappings.keySet()) {
 			String localPart = mappings.get(ontoIRI);
 			m.addIRIMapper(new SimpleIRIMapper(
