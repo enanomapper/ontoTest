@@ -2,6 +2,7 @@ package net.enanomapper.onto.test;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.profiles.OWL2DLProfile;
 import org.semanticweb.owlapi.profiles.OWLProfileReport;
 import org.semanticweb.owlapi.profiles.OWLProfileViolation;
+import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.util.AutoIRIMapper;
 import org.semanticweb.owlapi.util.SimpleIRIMapper;
 import org.xml.sax.InputSource;
@@ -92,7 +94,7 @@ public abstract class AbstractOntologyTest {
 			Assert.assertFalse(classes.isEmpty());
 			for (OWLClass owlClass : classes) {
 		        boolean hasLabel = false;
-		        Set<OWLAnnotation> annos = owlClass.getAnnotations(o);
+		        Collection<OWLAnnotation> annos = EntitySearcher.getAnnotations(owlClass, o);
 		        for (OWLAnnotation annotation : annos) {
 		        	if ("http://www.w3.org/2000/01/rdf-schema#label".equals(
 		        		    annotation.getProperty().getIRI().toString())
@@ -131,7 +133,7 @@ public abstract class AbstractOntologyTest {
 			Assert.assertFalse(classes.isEmpty());
 			for (OWLClass owlClass : classes) {
 		        boolean hasDef = false;
-		        Set<OWLAnnotation> annos = owlClass.getAnnotations(o);
+		        Collection<OWLAnnotation> annos = EntitySearcher.getAnnotations(owlClass, o);
 		        for (OWLAnnotation annotation : annos) {
 		        	if ("http://purl.obolibrary.org/obo/IAO_0000115".equals(
 		        		    annotation.getProperty().getIRI().toString())
