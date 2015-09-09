@@ -136,9 +136,12 @@ public abstract class AbstractOntologyTest {
 		        Collection<OWLAnnotation> annos = EntitySearcher.getAnnotations(owlClass, o);
 		        for (OWLAnnotation annotation : annos) {
 		        	if ("http://purl.obolibrary.org/obo/IAO_0000115".equals(
-		        		    annotation.getProperty().getIRI().toString())
-		        		)
+		        		annotation.getProperty().getIRI().toString())) {
 		        		hasDef = true;
+		        	} else if ("http://purl.org/dc/elements/1.1/description".equals(
+			        	annotation.getProperty().getIRI().toString())) {
+			        	hasDef = true;
+			        }
 		        }
 				if (!hasDef) {
 					problems.append(owlClass.getIRI().toString()).append(", \n");
