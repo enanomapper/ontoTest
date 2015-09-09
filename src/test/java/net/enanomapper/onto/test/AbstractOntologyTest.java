@@ -111,6 +111,28 @@ public abstract class AbstractOntologyTest {
 	}
 
 	@Test
+	public void checkForAtLeastOneClass() throws Exception {
+		OWLOntologyManager m = OWLManager.createOWLOntologyManager();
+		m.addIRIMapper(new AutoIRIMapper(
+			new File("materializedOntologies"), true
+		));
+		String root = AbstractOntologyTest.ROOT;
+		if (System.getProperty("ROOT") != null) {
+			root = System.getProperty("ROOT");
+		}
+		addMappings(m, root);
+		List<String> ontologyResource = getOntologyResource();
+		for (String resource : ontologyResource) {
+			OWLOntology o = m.loadOntology(
+				IRI.create("file://" + resource)
+			);
+			Set<OWLClass> classes = o.getClassesInSignature();
+			Assert.assertNotNull(classes);
+			Assert.assertFalse(classes.isEmpty()); // one or more classes!
+		}
+	}
+
+	@Test
 	public void checkIAODefinitions() throws Exception {
 		OWLOntologyManager m = OWLManager.createOWLOntologyManager();
 		m.addIRIMapper(new AutoIRIMapper(
