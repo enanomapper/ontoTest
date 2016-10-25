@@ -31,7 +31,7 @@ import org.xml.sax.XMLReader;
 
 public abstract class AbstractOntologyTest {
 
-	public static String ROOT = "/var/lib/jenkin.jenm/workspace/";
+	public static String ROOT = "/var/lib/jenkins.jenm/workspace/";
 
 	protected abstract List<String> getOntologyResource();
 	
